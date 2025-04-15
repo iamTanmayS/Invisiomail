@@ -17,10 +17,10 @@ class AuthController {
           'email' 
         ];
     
-        // Trigger Google OAuth with specified scopes
+        
         passport.authenticate('google', { 
           scope: scopes,
-          session: false // If you don't need sessions
+          session: false 
         })(req, res);
       }
 
@@ -32,9 +32,10 @@ class AuthController {
               return res.redirect(`${config.client.devUrl}/login?error=true`);
             }
       
-            // JWT payload
+           
             const payload = {
               id: user._id,
+              googleId : user.googleId,
               email: user.email,
               userName: user.userName
             };

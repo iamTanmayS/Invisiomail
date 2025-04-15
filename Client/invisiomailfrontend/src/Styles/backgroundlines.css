@@ -1,0 +1,19 @@
+/* Add this to your CSS file or create a new one and import it */
+
+.bg-line {
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+  }
+  
+  /* Add a subtle glow effect to make lines more visible */
+  @keyframes glow {
+    0%, 100% {
+      filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
+    }
+    50% {
+      filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.4));
+    }
+  }
+  
+  .animate-glow {
+    animation: glow 8s ease-in-out infinite;
+  }

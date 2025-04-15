@@ -1,0 +1,71 @@
+/* Hero Section Top - Contains the main hero elements */
+.hero-section-top {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+/* Hero Text Wrapper */
+.hero-text-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+/* Semi Title */
+.semi-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #EEEEEE;
+  margin: 1.5rem 0 2.5rem;
+  text-align: center;
+  max-width: 800px;
+  line-height: 1.4;
+}
+
+/* Buttons Container */
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Content Section - Contains the paragraphs */
+.content-section {
+  padding: 2rem 0;
+}
+
+/* Paragraphs */
+.content-section p {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  color: #EEEEEE;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .semi-title {
+    font-size: 1.75rem;
+    margin: 2rem 0 3rem;
+  }
+  
+  .buttons-container {
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .semi-title {
+    font-size: 2rem;
+  }
+}

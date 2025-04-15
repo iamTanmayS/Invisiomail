@@ -1,0 +1,82 @@
+/* Refined .herosectionbutton Style using the provided palette - with Gradient Glow */
+.herosectionbutton {
+  /* --- Base Dimensions & Layout --- */
+  height: 60px;
+  width: 170px;
+  margin: 15px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* --- Font & Text --- */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #EEEEEE; /* Light text */
+
+  /* --- Background & Border --- */
+  background-color: #222831; /* Darkest base */
+  border: 1px solid #31363F; /* Subtle border */
+  border-radius: 12px; /* Softer radius */
+
+  /* --- Positioning & Stacking --- */
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+
+  /* --- Initial Neumorphic Shadow (Adapted Palette) --- */
+  box-shadow: -6px -6px 12px #31363F, /* Light shadow top-left */
+              6px 6px 12px #1c2128,  /* Dark shadow bottom-right */
+              inset 4px 4px 8px #1c2128,   /* Dark inset */
+              inset -4px -4px 8px #31363F; /* Light inset */
+
+  /* --- Transitions --- */
+  /* Adding transform transition for subtle active effect */
+  transition: color 500ms, box-shadow 500ms, transform 100ms;
+}
+
+/* --- Gradient Glow Effect (Using Palette Teal + Vibrant Cyan) --- */
+.herosectionbutton::after {
+  content: 'wh';
+  width: 100%; /* Use 100% as per original gradient example */
+  height: 100%;/* Use 100% as per original gradient example */
+
+  /* --- NEW: Multi-color radial gradient --- */
+  /* Using Teal (#76ABAE) from palette and a vibrant Cyan */
+  /* Mimicking the structure of the second example's gradient */
+  background-image: radial-gradient( circle farthest-corner at 10% 20%,
+                      rgba(118, 171, 174, 1) 17.8%, /* Teal (#76ABAE) */
+                      rgba(2, 245, 255, 1) 100.2%     /* Vibrant Cyan (like original example) */
+                    );
+
+  filter: blur(20px); /* Keep the blur */
+  z-index: -1; /* Behind .herosectionbutton content */
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* Optional: Add transition if glow should change on hover/active */
+  /* transition: background-image 500ms, filter 500ms; */
+}
+
+/* --- Hover State --- */
+.herosectionbutton:hover {
+  color: #222831; /* Change text to Teal */
+  /* Flatter shadow effect on hover */
+  box-shadow: -2px -2px 5px #31363F,
+              2px 2px 5px #1c2128,
+              inset 2px 2px 4px #1c2128,
+              inset -2px -2px 4px #31363F;
+}
+
+/* --- Active State --- */
+.herosectionbutton:active {
+  color: #EEEEEE; /* Revert text slightly or keep Teal */
+  /* Press-in effect shadow */
+  box-shadow: inset 4px 4px 8px #1c2128,
+              inset -4px -4px 8px #31363F;
+  /* Subtle press-down transform */
+  transform: scale(0.98);
+  /* Use the faster transition for the click feedback */
+  transition-duration: 100ms;
+}

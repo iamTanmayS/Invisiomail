@@ -2,7 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { itemVariants } from './Animationconstants';
-import { dropdownLinks } from './dropdownData';
+import {dropdownLinks} from "./Dropdowndata"
 
 
 const DropdownContent = ({ type }) => {

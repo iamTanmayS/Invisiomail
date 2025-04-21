@@ -3,8 +3,8 @@ import "../Styles/Dashboard/Dashboard.css"
 import LoadingScreen from '../components/SideBar/Loading';
 import MobileBottomBar from '../components/SideBar/MobileBottomBar';
 import Header from '../components/SideBar/Header';
-import SidebarContent from "../components/SideBar/SideBarContent"
-import LeftMiniBar from "../components/SideBar/LeftMiniBar"
+import SidebarContent from "../components/SideBar/SideBarContent";
+import LeftMiniBar from "../components/SideBar/LeftMinibar";
 import DashboardContent from '../components/SideBar/DashBoardContent';
 import SettingsPanel from '../components/SideBar/SettingsPanel';
 import AuthorLinks from '../components/SideBar/AutoLinks';

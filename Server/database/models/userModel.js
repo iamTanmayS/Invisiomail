@@ -30,8 +30,13 @@ const UserSchema = new Schema({
   refreshToken:{
     type:String,
     select:false,
-  }
-  
+  },
+  googleAccessToken:{
+    type:String,
+  },    // Google's access token for Gmail API
+  googleRefreshToken: {
+    type:String, 
+  },
 },
 
 {

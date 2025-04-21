@@ -1,0 +1,40 @@
+/* src/components/AuthorLinks/AuthorLinks.css */
+.author-links-container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* space-x-4 */
+  bottom: 5rem; /* bottom-20 */
+  right: 1.25rem; /* right-5 */
+  z-index: 10; /* Adjust as needed */
+}
+
+.author-link {
+  transition: transform 150ms ease-in-out;
+  display: inline-block; /* Prevents extra space */
+}
+
+.author-link:hover {
+  transform: scale(1.25); /* hover:scale-125 */
+}
+
+.author-link .icon {
+  width: 2rem; /* w-8 */
+  height: 2rem; /* h-8 */
+  display: block;
+}
+
+.author-link .twitter-icon {
+  color: #3b82f6; /* --color-blue-500 */
+}
+
+.author-link .github-dark {
+  color: #000000; /* --color-black */
+}
+
+/* Responsive */
+@media (min-width: 640px) { /* sm breakpoint */
+  .author-links-container {
+    bottom: 1.25rem; /* sm:bottom-5 */
+  }
+}

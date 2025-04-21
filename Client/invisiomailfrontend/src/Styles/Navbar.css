@@ -52,9 +52,9 @@ body {
 }
 
 .navbar.scrolled {
-  background: rgba(49, 54, 63, 0.95);
+  background: rgba(0, 0, 0, 0.95);
   box-shadow: 0 10px 30px var(--shadow-color-strong);
-  border: 1px solid var(--accent);
+  border: 1px solid var(--accent-transparent);
 }
 
 .navbar-container {
@@ -617,4 +617,43 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+.profile-info {
+  max-width: 200px; /* Adjust this value based on your dropdown width */
+  overflow: hidden;
+}
+
+.profile-info h3 {
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-email {
+  font-size: 0.85rem;
+  color: rgba(238, 238, 238, 0.8);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+/* Make sure the profile dropdown has appropriate width */
+.profile-dropdown {
+  min-width: 240px;
+  max-width: 280px;
+}
+
+/* Ensure the profile content has proper padding */
+.profile-content {
+  padding: 16px;
+}
+
+/* Make sure the profile header has proper spacing */
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  gap: 12px;
 }

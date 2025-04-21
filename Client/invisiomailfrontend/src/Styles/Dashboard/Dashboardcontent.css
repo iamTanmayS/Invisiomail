@@ -1,0 +1,14 @@
+/* src/components/DashboardContent/DashboardContent.css */
+.dashboard-main {
+  display: flex;
+  flex: 1; /* Grow to fill available space */
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem; /* py-8 px-4 */
+}
+
+.main-title {
+  font-size: 3rem; /* text-5xl */
+  font-weight: 700; /* font-bold */
+  color: #6b7280; /* --color-gray-500 */
+}

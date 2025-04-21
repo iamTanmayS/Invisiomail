@@ -1,0 +1,25 @@
+/* src/components/LoadingScreen/LoadingScreen.css */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 600; /* font-semibold */
+  color: #ffffff; /* --color-white */
+  background-color: #31363F; /* --color-indigo-800 */
+  opacity: 1;
+  transition: opacity 300ms ease-in-out; /* --transition-duration / timing */
+}
+
+.loading-screen.hidden {
+  opacity: 0;
+  pointer-events: none; /* Prevent interaction when hidden */
+}
+
+.loader{
+  width: 80px;
+  height: 80px;
+}

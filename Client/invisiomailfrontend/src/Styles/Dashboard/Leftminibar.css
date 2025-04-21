@@ -1,0 +1,97 @@
+/* src/components/Sidebar/LeftMiniBar.css */
+.left-mini-bar {
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 4rem; /* w-16 */
+  padding-top: 1rem; /* py-4 */
+  padding-bottom: 1rem;
+  background-color: #ffffff; /* --color-white */
+  border-right: 2px solid #e0e7ff; /* --color-indigo-100 */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* --shadow-md */
+  border-top-right-radius: 1.5rem; /* --border-radius-3xl */
+  border-bottom-right-radius: 1.5rem; /* --border-radius-3xl */
+  z-index: 20; /* Above backdrop, below user menu dropdown potentially */
+  height: 100%; /* Take full height within its flex container */
+}
+
+.mini-bar-logo-container {
+  flex-shrink: 0;
+  padding-top: 1rem; /* py-4 */
+  padding-bottom: 1rem;
+}
+
+.mini-bar-logo {
+  width: 2.5rem; /* w-10 */
+  height: auto;
+}
+
+.mini-bar-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1; /* Takes up remaining space */
+  padding: 0.5rem; /* p-2 */
+  gap: 1rem; /* space-y-4 */
+  margin-top: 1rem; /* Add some space after logo */
+}
+
+.mini-bar-button {
+  padding: 0.5rem; /* p-2 */
+  border-radius: 0.5rem; /* --border-radius-lg */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* --shadow-md */
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+  background-color: #ffffff; /* --color-white */
+  color: #6b7280; /* --color-gray-500 */
+  border: none;
+  cursor: pointer;
+}
+
+.mini-bar-button:hover {
+  background-color: #3730a3; /* --color-indigo-800 */
+  color: #ffffff; /* --color-white */
+}
+
+.mini-bar-button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 0 3px #4f46e5; /* shadow + ring with --color-indigo-600 */
+}
+
+.mini-bar-button.active {
+  background-color: #4f46e5; /* --color-indigo-600 */
+  color: #ffffff; /* --color-white */
+}
+
+.mini-bar-button .icon {
+  width: 1.5rem; /* w-6 */
+  height: 1.5rem; /* h-6 */
+  display: block;
+}
+
+
+.mini-bar-user-menu {
+  position: relative; /* Needed for UserMenu positioning */
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 0.5rem; /* p-2 */
+}
+
+/* Make mini bar visible on larger screens */
+@media (min-width: 640px) { /* sm breakpoint */
+  .left-mini-bar {
+    display: flex;
+  }
+  /* Adjust UserMenu position for mini-bar context */
+  .mini-bar-user-menu .user-menu-dropdown {
+      left: 3.5rem; /* Example: Adjust based on mini-bar width */
+      bottom: 0.5rem; /* Example: Align near bottom */
+      top: auto; /* Override mobile positioning */
+  }
+  .mini-bar-user-menu .user-menu-avatar {
+      width: 2.5rem; /* w-10 */
+      height: 2.5rem; /* h-10 */
+  }
+}

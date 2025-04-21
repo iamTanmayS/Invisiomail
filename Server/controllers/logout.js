@@ -1,3 +1,5 @@
+const config = require("../configs/configenv")
+const jwt = require("jsonwebtoken");
 const User = require("../database/models/userModel")
 
 const logout = async (req, res) => {
@@ -6,13 +8,17 @@ const logout = async (req, res) => {
       const refreshToken = isMobile
         ? req.headers.authorization?.split(' ')[1]
         : req.cookies.refreshToken;
-  
+      console.log(`this is logout token ${refreshToken}`)
       if (!refreshToken) return res.sendStatus(204);
-  
-      const user = await User.findOne({ refreshToken });
+      const decode = jwt.verify(refreshToken,config.jwt.refreshTokenSecret) 
+      const googleId = decode.googleId;
+      const user = await User.findOne({ googleId });
+      console.log(user)
       if (user) {
         user.refreshToken = null;
         user.accessToken  = null;
+        user.googleAccessToken = null;
+        user.googleRefreshToken = null;
         await user.save();
       }
   
@@ -20,13 +26,23 @@ const logout = async (req, res) => {
         res.clearCookie('refreshToken', {
           httpOnly: true,
           secure: false,
-          sameSite: 'Strict',
+          sameSite: 'Lax',
         });
   
         res.clearCookie('accessToken', {
           httpOnly: true,
           secure: false,
-          sameSite: 'Strict',
+          sameSite: 'Lax',
+        });
+        res.clearCookie('googleRefreshToken', {
+          httpOnly: true,
+          secure: false,
+          sameSite: 'Lax',
+        });
+        res.clearCookie('googleAccessToken', {
+          httpOnly: true,
+          secure: false,
+          sameSite: 'Lax',
         });
       }
   

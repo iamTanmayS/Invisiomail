@@ -5,8 +5,15 @@ const connectMongodb = require("../Server/database/connection/connection")
 const passport = require('passport')
 const configurePassport = require('./configs/passport/passport')
 const authRoutes = require('./routes/auth')
+const emailRoutes = require("./routes/emailroutes")
+const userRoutes = require("./routes/userroutes")
 const cookieParser = require("cookie-parser")
 const app = express()
+
+
+
+
+
 
 app.use(cors({
     origin:config.client.devUrl,
@@ -14,21 +21,46 @@ app.use(cors({
     credentials: true
 }))
 
+
+
+
+
 app.use(express.json())
 app.use(cookieParser());
+
+
+
+
 // Initialize passport
 configurePassport()
 app.use(passport.initialize())
 
+
+
+
 // Mount auth routes
 app.use('/auth', authRoutes)
+app.use("/",emailRoutes)
+app.use("/",userRoutes)
+
+
+
+
 
 connectMongodb()
+
+
+
 
 app.post("/",(req,res)=>{
     res.send("Hello from server")
 })
 
+
+
+
+
+// server started
 app.listen(
     config.port.development || 8000 ,()=>{
         console.log("server is running on port 3000")

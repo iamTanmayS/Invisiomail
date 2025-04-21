@@ -32,53 +32,75 @@ class AuthController {
               return res.redirect(`${config.client.devUrl}/login?error=true`);
             }
       
-           
             const payload = {
               id: user._id,
-              googleId : user.googleId,
+              googleId: user.googleId,
               email: user.email,
-              userName: user.userName
+              userName: user.displayName
             };
       
-            // Generate tokens
-            const accessToken = jwt.sign(payload, config.jwt.accessTokenSecret, {
-              expiresIn: '15m',
+            // JWTs for your app's auth
+            const jwtAccessToken = jwt.sign(payload, config.jwt.accessTokenSecret, {
+              expiresIn: '1h',
             });
-            const refreshToken = jwt.sign(payload, config.jwt.refreshTokenSecret, {
+            const jwtRefreshToken = jwt.sign(payload, config.jwt.refreshTokenSecret, {
               expiresIn: '30d',
             });
       
-          
-            const updateuser = await User.findOne({ _id: user._id });
+            const updateuser = await User.findById(user._id);
             if (updateuser) {
-              updateuser.refreshToken = refreshToken;
+              updateuser.accessToken = jwtAccessToken;
+              updateuser.refreshToken = jwtRefreshToken;
+              updateuser.googleAccessToken = user.googleAccessToken;
+              updateuser.googleRefreshToken = user.googleRefreshToken;
               await updateuser.save();
             }
       
-            
             const isMobile = req.headers['x-client-type'] === 'mobile';
       
             if (isMobile) {
-              
-              return res.status(200).json({ accessToken, refreshToken });
+              // Send all tokens to client (mobile app can store them securely)
+              return res.status(200).json({
+                accessToken: jwtAccessToken,
+                refreshToken: jwtRefreshToken,
+                googleAccessToken: user.googleAccessToken,
+                googleRefreshToken: user.googleRefreshToken
+              });
             } else {
-              
-              res.cookie('refreshToken', refreshToken, {
+              // Set all tokens in secure cookies
+              const isProd = process.env.NODE_ENV === 'production';
+      
+              res.cookie('accessToken', jwtAccessToken, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'Strict',
-                maxAge: 30 * 24 * 60 * 60 * 1000,
+                secure: false,
+                sameSite: 'Lax',
+                maxAge: 60 * 60 * 1000
               });
       
-              res.cookie('accessToken', accessToken, {
+              res.cookie('refreshToken', jwtRefreshToken, {
                 httpOnly: true,
-                secure: process.env.NODE_ENV === 'production',
-                sameSite: 'Strict',
-                maxAge: 15 * 60 * 1000,
+                secure: false,
+                sameSite: 'Lax',
+                maxAge: 30 * 24 * 60 * 60 * 1000
+              });
+      
+              res.cookie('googleAccessToken', user.googleAccessToken, {
+                httpOnly: true,
+                secure: false,
+                sameSite: 'Lax',
+                maxAge: 60 * 60 * 1000 // 1 hour — Gmail token expires quickly
+              });
+      
+              res.cookie('googleRefreshToken', user.googleRefreshToken, {
+                httpOnly: true,
+                secure: false,
+                sameSite: 'Lax',
+                maxAge: 30 * 24 * 60 * 60 * 1000 // Google's refresh token is long-lived
               });
       
               return res.redirect(`${config.client.devUrl}`);
             }
+      
           } catch (error) {
             console.error('Error in googleAuthCallback:', error);
             return res.status(500).json({ message: 'Internal server error' });

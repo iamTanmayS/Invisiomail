@@ -1,0 +1,70 @@
+/* src/components/Sidebar/MobileBottomBar.css */
+.mobile-bottom-bar {
+  position: fixed;
+  inset-inline-start: 0; /* inset-x-0 */
+  inset-inline-end: 0; /* inset-x-0 */
+  bottom: 0;
+  display: flex;
+  flex-direction: row-reverse; /* flex-row-reverse */
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem; /* px-4 py-2 */
+  background-color: #ffffff; /* --color-white */
+  border-top: 1px solid #e0e7ff; /* --color-indigo-100 */
+  border-top-left-radius: 1.5rem; /* --border-radius-3xl */
+  border-top-right-radius: 1.5rem; /* --border-radius-3xl */
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-t */
+  z-index: 20; /* Ensure it's above main content */
+}
+
+.nav-button {
+  padding: 0.5rem; /* p-2 */
+  border-radius: 0.5rem; /* --border-radius-lg */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* --shadow-md */
+  transition: background-color 150ms ease-in-out, color 150ms ease-in-out;
+  background-color: #ffffff; /* --color-white */
+  color: #6b7280; /* --color-gray-500 */
+  border: none;
+  cursor: pointer;
+}
+
+.nav-button:hover {
+  background-color: #3730a3; /* --color-indigo-800 */
+  color: #ffffff; /* --color-white */
+}
+
+.nav-button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 0 3px #4f46e5; /* --shadow-md, focus:ring with --color-indigo-600 */
+}
+
+.nav-button.active {
+  background-color: #4f46e5; /* --color-indigo-600 */
+  color: #ffffff; /* --color-white */
+}
+
+.nav-button .icon {
+  width: 1.5rem; /* w-6 */
+  height: 1.5rem; /* h-6 */
+  display: block; /* Prevent extra space */
+}
+
+.nav-logo {
+  width: 2.5rem; /* w-10 */
+  height: auto;
+}
+
+.nav-user-menu {
+  padding: 0.5rem; /* p-2 to match original structure */
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+/* Media query to hide on larger screens */
+@media (min-width: 640px) { /* sm breakpoint */
+  .mobile-bottom-bar {
+    display: none;
+  }
+}

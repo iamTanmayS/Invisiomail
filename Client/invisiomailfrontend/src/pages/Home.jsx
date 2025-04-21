@@ -1,14 +1,31 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
 import { loginWithGoogle, logout } from '../Api/Authentication'
+import { fetchUser } from '../Redux/Slice/authslice';
 import HeroSection from '../components/HerosectionBackground/HeroSection'
 import "../Styles/Home.css"
 import Herosectionbutton from '../components/StyledComponent/Herosectionbutton'
 import HeroTextDisplay from '../components/HeroRotatingText'
 import { motion } from 'framer-motion'
+import { createRawMail } from '../Api/EmailsFunctions'
+import { useSelector } from "react-redux";
+import { selectIsAuthenticated } from "../Redux/Slice/authslice";
+import GetStartedbuttonfunctionality from '../utils/Getstartedbuttonfunctionality';
 
 function Home() {
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const myRotatingWords = ["Code", "Ideas", "Solutions", "Apps"];
   
+  const handleLogin = async () => {
+    try {
+      await loginWithGoogle();
+      // Will redirect to Google OAuth
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  };
+
   return (
     <HeroSection>
       <div className="hero-content-container">
@@ -45,12 +62,12 @@ function Home() {
           >
             <Herosectionbutton 
               buttontitle="Get Started" 
-              herobuttonfunction={() => loginWithGoogle()}
+              herobuttonfunction={()=>GetStartedbuttonfunctionality(isAuthenticated)}
             />
             
             <Herosectionbutton 
               buttontitle="Learn More" 
-              herobuttonfunction={() => {}}
+              herobuttonfunction={() => createRawMail({to:"tanmayshukla338@gmail.com", subject:"Hello", body:"Hello World!"})}
             />
           </motion.div>
         </div>

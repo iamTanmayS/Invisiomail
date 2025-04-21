@@ -1,0 +1,55 @@
+/* src/Dashboard.css */
+/* Styles previously in App.css, now specific to the Dashboard layout */
+
+.dashboard-layout {
+  display: flex;
+  height: 100%;
+  /* Ensure layout takes full viewport height if Dashboard is root */
+  min-height: 100vh;
+  overflow: hidden; /* Prevent scrolling on the main layout */
+  background-color: #f3f4f6; /* Background for the whole dashboard area */
+}
+
+.sidebar-wrapper {
+  display: flex; /* To hold MiniBar and Content side-by-side */
+  flex-shrink: 0; /* Prevent sidebar area from shrinking */
+  position: relative; /* For backdrop positioning */
+  z-index: 15; /* Ensure wrapper is above main content but potentially below panels */
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 5; /* Below sidebar content */
+  background-color: rgba(0, 0, 0, 0.5); /* bg-black bg-opacity-50 */
+  opacity: 1;
+  transition: opacity 300ms ease-in-out;
+}
+
+@media (min-width: 1024px) { /* lg:hidden for backdrop */
+    .sidebar-backdrop {
+        display: none;
+    }
+}
+
+.main-area {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Grow to fill remaining space */
+  /* Allow main content area (excluding header) to scroll */
+  overflow: hidden; /* Prevent double scrollbars, manage scrolling inside */
+}
+
+.main-area > .dashboard-header {
+  /* Header styles are in Header.css */
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.content-wrapper {
+    display: flex;
+    flex: 1; /* Allow content (DashboardContent) to fill space */
+    overflow-y: auto; /* Allow this part to scroll */
+}
+
+/* Add any other global layout adjustments for the dashboard here */
+

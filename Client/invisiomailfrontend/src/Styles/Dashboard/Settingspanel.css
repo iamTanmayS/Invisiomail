@@ -1,0 +1,46 @@
+/* src/components/SettingsPanel/SettingsPanel.css */
+.settings-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* bg-black bg-opacity-50 */
+  opacity: 0;
+  transition: opacity 300ms ease-in-out; /* --transition-duration / timing */
+  z-index: 30; /* Below panel, above other content */
+  pointer-events: none;
+}
+
+.settings-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.settings-panel {
+  position: fixed;
+  inset-block-start: 0; /* inset-y-0 */
+  inset-block-end: 0;
+  inset-inline-end: 0; /* right-0 */
+  width: 16rem; /* w-64 */
+  background-color: #ffffff; /* --color-white */
+  border-left: 1px solid #e0e7ff; /* --color-indigo-100 */
+  border-top-left-radius: 1.5rem; /* --border-radius-3xl */
+  border-bottom-left-radius: 1.5rem; /* --border-radius-3xl */
+  z-index: 40; /* Above backdrop */
+
+  /* Transition */
+  transform: translateX(100%);
+  transition: transform 300ms ease-in-out; /* --transition-duration / timing */
+}
+
+.settings-panel.open {
+  transform: translateX(0);
+}
+
+.settings-content {
+    padding: 2rem 1rem; /* px-4 py-8 */
+}
+
+.settings-title {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: 600; /* font-semibold */
+    color: #11182c; /* --color-gray-900 */
+}

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
 import "../Styles/Dashboard/Dashboard.css"
+
+import React, { useEffect, useState } from 'react';
+
+import AuthorLinks from '../components/SideBar/AutoLinks';
+import EmailDashboard from '../components/SideBar/DashBoardContent';
+import Header from '../components/SideBar/Header';
+import LeftMiniBar from "../components/SideBar/LeftMinibar";
 import LoadingScreen from '../components/SideBar/Loading';
 import MobileBottomBar from '../components/SideBar/MobileBottomBar';
-import Header from '../components/SideBar/Header';
-import SidebarContent from "../components/SideBar/SideBarContent";
-import LeftMiniBar from "../components/SideBar/LeftMinibar";
-import DashboardContent from '../components/SideBar/DashBoardContent';
 import SettingsPanel from '../components/SideBar/SettingsPanel';
-import AuthorLinks from '../components/SideBar/AutoLinks';
-
-
+import SidebarContent from "../components/SideBar/SideBarContent";
 
 function Dashboard() {
   // State management previously in App.js is now here
@@ -105,14 +105,14 @@ function Dashboard() {
 
         {/* Main Content Area */}
         <div className="main-area">
-          <Header
+          {/* <Header
             onToggleSettings={handleToggleSettings}
             onToggleSidebar={handleToggleSidebar} // Pass handler for mobile subheader
             className="dashboard-header" // Add class for potential specific styling
           />
-          {/* Content Wrapper for scrolling */}
+          Content Wrapper for scrolling */}
           <div className="content-wrapper">
-            <DashboardContent />
+            <EmailDashboard />
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@ function Dashboard() {
         onClose={closeSettingsPanel}
       />
 
-      {/* Fixed Links */}
+   
       <AuthorLinks />
     </>
   );

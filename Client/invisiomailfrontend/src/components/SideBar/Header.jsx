@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
 import "../../Styles/Dashboard/Header.css"
+
+import { IoIosNotificationsOutline, IoMdMore } from "react-icons/io";
+import React, { useState } from 'react';
+
 import { CiSettings } from "react-icons/ci";
 import { FaGithub } from "react-icons/fa";
 import { LuMessageSquareText } from "react-icons/lu";
-import { IoIosNotificationsOutline, IoMdMore } from "react-icons/io";
-
 
 function Header({ onToggleSettings, onToggleSidebar }) {
     const [isSubHeaderOpen, setIsSubHeaderOpen] = useState(false);

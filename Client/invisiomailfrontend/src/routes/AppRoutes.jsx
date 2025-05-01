@@ -1,12 +1,15 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Home from '../pages/Home';
+import { Route, Routes } from 'react-router-dom';
+
 import About from '../pages/About';
-import NotFound from '../pages/NotFound';
-import { Layout } from '../layout/Layout';
-import LoginPage from '../pages/LoginPage';
+import ComposeEmail from '../pages/ComposeEmail';
 import Dashboard from '../pages/Dashboard';
 import DashboardLayout from '../layout/Dashboardlayout';
+import EmailContentView from '../pages/EmailContentView';
+import Home from '../pages/Home';
+import { Layout } from '../layout/Layout';
+import LoginPage from '../pages/LoginPage';
+import NotFound from '../pages/NotFound';
+import React from 'react';
 
 const AppRoutes = () => {
   return (
@@ -23,6 +26,8 @@ const AppRoutes = () => {
 
       <Route element={<DashboardLayout/>}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/email/:emailId" element={<EmailContentView />} />
+        <Route path="/email/send" element= {<ComposeEmail/>}/>
       </Route>
     </Routes>
   );

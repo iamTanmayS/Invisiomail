@@ -1,0 +1,318 @@
+/* EmailContentView.css */
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #1e40af;
+  --background-color: #f9fafb;
+  --card-background: #ffffff;
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
+  --border-color: #e5e7eb;
+  --hover-background: #f3f4f6;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+}
+
+/* Make sure the body has proper height and overflow settings */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  background-color: var(--background-color);
+}
+
+/* Container for the entire email view component */
+.email-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background-color: var(--card-background);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 4rem); /* Subtract margin to avoid overflow */
+  overflow: hidden; /* Hide overflow in container, letting child elements scroll */
+}
+
+.email-header {
+  padding: 2rem;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.email-subject {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.email-metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.sender-info,
+.receiver-info,
+.date-info {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.from-label,
+.to-label,
+.date-label {
+  color: var(--text-tertiary);
+  min-width: 3rem;
+}
+
+.from-value,
+.to-value,
+.date-value {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* Make the body container scrollable */
+.email-body-container {
+  flex: 1;
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 2rem;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.email-body {
+  color: var(--text-primary);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* Image styling */
+.email-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  margin: 1rem 0;
+  display: block;
+}
+
+/* Handle cases where images might be very large */
+.email-html-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: var(--radius-sm);
+}
+
+/* Link styling */
+.email-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.email-link:hover {
+  text-decoration: underline;
+  color: var(--secondary-color);
+}
+
+.email-html-content a,
+.email-text-content a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.email-html-content a:hover,
+.email-text-content a:hover {
+  text-decoration: underline;
+  color: var(--secondary-color);
+}
+
+.email-text-content {
+  white-space: pre-wrap;
+}
+
+.email-text-content p {
+  margin-bottom: 1rem;
+}
+
+/* States */
+.email-loading,
+.email-error,
+.email-not-found {
+  padding: 4rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  max-height: 80vh;
+  background-color: var(--card-background);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  margin: 2rem auto;
+  max-width: 600px;
+}
+
+.loading-spinner {
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 3px solid var(--primary-color);
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* HTML Email specific styles */
+.email-html-content {
+  width: 100%;
+}
+
+/* Handle common email HTML elements */
+.email-html-content table {
+  max-width: 100%;
+  margin: 1rem 0;
+  border-collapse: collapse;
+}
+
+.email-html-content td, 
+.email-html-content th {
+  padding: 0.5rem;
+}
+
+.email-html-content pre,
+.email-html-content code {
+  background-color: var(--hover-background);
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  font-size: 0.875rem;
+  margin: 1rem 0;
+  font-family: monospace;
+}
+
+/* Handle horizontal scrolling for wide elements */
+.email-html-content pre,
+.email-html-content table,
+.email-html-content div {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* Handle iframe content like embedded videos */
+.email-html-content iframe {
+  max-width: 100%;
+  border: none;
+  margin: 1rem 0;
+}
+
+/* Fix for common email layout issues */
+.email-html-content div[style*="position: absolute"] {
+  position: static !important;
+}
+
+.email-html-content div[style*="display: none"] {
+  display: none !important;
+}
+
+/* Style blockquotes often used in email replies */
+.email-html-content blockquote {
+  border-left: 3px solid var(--border-color);
+  padding-left: 1rem;
+  margin-left: 0;
+  color: var(--text-secondary);
+}
+
+/* Style attachments if needed */
+.attachment-container {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: var(--hover-background);
+  border-radius: var(--radius-md);
+  margin: 1rem 0;
+}
+
+.attachment-icon {
+  margin-right: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.attachment-name {
+  font-weight: 500;
+}
+
+/* Add a scrollbar indicator on Windows/Linux */
+.email-body-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.email-body-container::-webkit-scrollbar-track {
+  background: var(--background-color);
+  border-radius: 4px;
+}
+
+.email-body-container::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 4px;
+}
+
+.email-body-container::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .email-container {
+    margin: 1rem;
+    border-radius: var(--radius-md);
+    max-height: calc(100vh - 2rem); /* Adjust max height for mobile */
+  }
+  
+  .email-header {
+    padding: 1.5rem;
+  }
+  
+  .email-body-container {
+    padding: 1.5rem;
+  }
+  
+  .email-subject {
+    font-size: 1.25rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #3b82f6;
+    --secondary-color: #60a5fa;
+    --background-color: #111827;
+    --card-background: #1f2937;
+    --text-primary: #f9fafb;
+    --text-secondary: #e5e7eb;
+    --text-tertiary: #d1d5db;
+    --border-color: #374151;
+    --hover-background: #374151;
+  }
+  
+  .loading-spinner {
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top: 3px solid var(--primary-color);
+  }
+}

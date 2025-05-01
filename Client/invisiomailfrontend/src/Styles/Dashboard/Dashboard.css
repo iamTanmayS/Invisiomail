@@ -7,7 +7,7 @@
   /* Ensure layout takes full viewport height if Dashboard is root */
   min-height: 100vh;
   overflow: hidden; /* Prevent scrolling on the main layout */
-  background-color: #f3f4f6; /* Background for the whole dashboard area */
+  background-color: #31363F; /* Background for the whole dashboard area */
 }
 
 .sidebar-wrapper {
@@ -36,7 +36,6 @@
   display: flex;
   flex-direction: column;
   flex: 1; /* Grow to fill remaining space */
-  /* Allow main content area (excluding header) to scroll */
   overflow: hidden; /* Prevent double scrollbars, manage scrolling inside */
 }
 
@@ -48,7 +47,8 @@
 .content-wrapper {
     display: flex;
     flex: 1; /* Allow content (DashboardContent) to fill space */
-    overflow-y: auto; /* Allow this part to scroll */
+    height: calc(100vh - 64px); /* Subtract header height */
+    overflow: hidden; /* Prevent double scrollbars */
 }
 
 /* Add any other global layout adjustments for the dashboard here */

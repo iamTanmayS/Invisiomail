@@ -1,0 +1,86 @@
+// src/styles/Dashboard/Dashboardstyles/Pagination.scss
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    gap: 1rem;
+
+    .pagination-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1rem;
+        background-color: #fff;
+        border: 1px solid #dadce0;
+        border-radius: 4px;
+        color: #1a73e8;
+        font-size: 0.875rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover:not(.disabled) {
+            background-color: #f6f9fe;
+            border-color: #d2e3fc;
+        }
+
+        &:active:not(.disabled) {
+            background-color: #e8f0fe;
+        }
+
+        &.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            color: #5f6368;
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        span {
+            line-height: 1; // Ensure text aligns well with icon
+        }
+    }
+
+    .pagination-info {
+        display: flex;
+        align-items: center;
+        color: #5f6368;
+        font-size: 0.875rem;
+
+        .page-number {
+            padding: 0 0.5rem;
+        }
+    }
+}
+
+// Optional: Add media queries if needed for smaller screens
+@media (max-width: 480px) {
+    .pagination {
+        gap: 0.5rem;
+
+        .pagination-button {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.8rem;
+
+            span {
+                
+                display: none;
+            }
+
+            svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        .pagination-info {
+            font-size: 0.8rem;
+        }
+    }
+}

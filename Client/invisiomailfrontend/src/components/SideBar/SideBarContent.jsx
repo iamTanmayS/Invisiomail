@@ -44,7 +44,7 @@ function SidebarContent({ isOpen, currentTab }) {
                             <img
                                 aria-hidden="true"
                                 className="promo-image"
-                                src="/assets/undraw_web_developer_p3e5.svg" // Adjust path
+                                src="https://plus.unsplash.com/premium_photo-1744967143306-0ec5b49ca2eb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Adjust path
                                 alt=""
                             />
                             <p className="promo-text">

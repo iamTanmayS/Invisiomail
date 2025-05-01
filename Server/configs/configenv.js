@@ -27,6 +27,9 @@ const config = {
   refreshTokenSecret: getEnv("JWT_REFRESHTOKEN_SECRET"),
   expiry:getEnv("JWT_EXPIRY")
  },
+ mongodb:{
+  url:getEnv("MONGO_URL")
+ }
  
  }
 

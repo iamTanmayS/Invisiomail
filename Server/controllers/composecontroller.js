@@ -1,6 +1,6 @@
 const { google } = require('googleapis');
 const { parseMessage } = require('../utils/gmailutils');
-
+const Email = require('../database/models/emailModel');
 class ComposeController {
   constructor(auth) {
     this.gmail = google.gmail({ version: 'v1', auth });
@@ -8,15 +8,26 @@ class ComposeController {
 
   createEmailRaw(emailData) {
     const { to, subject, body, cc = '', bcc = '' } = emailData;
+    const boundary = 'foo_bar_baz';
     let email = '';
 
     email += `To: ${to}\r\n`;
     if (cc) email += `Cc: ${cc}\r\n`;
     if (bcc) email += `Bcc: ${bcc}\r\n`;
     email += `Subject: ${subject}\r\n`;
-    email += 'Content-Type: text/plain; charset=utf-8\r\n';
-    email += 'MIME-Version: 1.0\r\n\r\n';
+    email += 'MIME-Version: 1.0\r\n';
+    email += `Content-Type: multipart/alternative; boundary=${boundary}\r\n\r\n`;
+    
+    // Plain text version
+    email += `--${boundary}\r\n`;
+    email += 'Content-Type: text/plain; charset=utf-8\r\n\r\n';
+    email += 'This email contains HTML content.\r\n\r\n';
+    
+    // HTML version
+    email += `--${boundary}\r\n`;
+    email += 'Content-Type: text/html; charset=utf-8\r\n\r\n';
     email += body;
+    email += `\r\n--${boundary}--`;
 
     return Buffer.from(email).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   }
@@ -28,6 +39,7 @@ class ComposeController {
         userId: 'me',
         resource: { raw }
       });
+      
       return response.data;
     } catch (error) {
       console.error('Error sending email:', error);

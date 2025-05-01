@@ -1,0 +1,115 @@
+// src/styles/Dashboard/_variables.scss
+// --- Variable Definitions for Email Dashboard ---
+
+// == Colors ==
+
+// Primary Action Colors
+$primary-color: #1a73e8; // Main interactive blue (buttons, links, active states)
+$primary-color-dark: #1765cc; // Darker shade for hover/active
+$primary-color-light: #4285f4; // Lighter shade if needed
+$primary-background-light: #e8f0fe; // Background for selected items
+$primary-background-hover: #f6f9fe; // Lighter background hover related to primary
+
+// Text Colors
+$text-primary: #202124; // Main text color
+$text-secondary: #5f6368; // Dimmer text, icons, placeholders
+$text-light: #ffffff; // Text on dark backgrounds
+$text-link: $primary-color; // Link color
+
+// Background Colors
+$background-main: #f6f8fc; // Overall page background
+$background-content: #ffffff; // Content areas (email list, modals)
+$background-searchbar: #eaf1fb; // Search bar default background
+$background-header: #f1f3f4; // Modal headers, etc.
+$background-hover-light: rgba(0, 0, 0, 0.05); // Subtle hover on light background
+$background-hover-dark: rgba(255, 255, 255, 0.1); // Subtle hover on dark background
+$background-overlay: rgba(0, 0, 0, 0.3); // Modal overlay
+
+// Border Colors
+$border-color-light: #f1f3f4; // Very light borders (between emails)
+$border-color-medium: #dadce0; // Standard borders (pagination buttons)
+$border-color-dark: #e0e0e0; // Slightly darker borders (modal header separator)
+$border-color-focus: $primary-color; // Border on focus state (if needed)
+
+// Status & Accent Colors
+$success-color: #34a853; // Green (e.g., for success messages)
+$warning-color: #f4b400; // Yellow (e.g., for warnings, stars)
+$error-color: #ea4335; // Red (e.g., for errors)
+$star-color: $warning-color; // Specific color for starred items
+
+// Skeleton Loading Colors
+$skeleton-base-color: #e0e0e0;
+$skeleton-shine-color: #f5f5f5;
+$skeleton-placeholder-color: #bdbdbd; // Slightly darker elements within skeleton
+
+
+// == Typography ==
+
+$font-family-sans: 'Roboto', 'Segoe UI', Helvetica, Arial, sans-serif;
+$font-family-monospace: monospace;
+
+$base-font-size: 1rem; // Typically 16px
+$font-size-small: 0.75rem; // 12px
+$font-size-medium: 0.875rem; // 14px
+$font-size-large: 1.25rem; // 20px
+$font-size-xl: 1.5rem; // 24px
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+
+
+// == Spacing ==
+
+$spacing-unit: 0.25rem; // Base unit (4px)
+$spacing-xs: $spacing-unit * 1; // 0.25rem (4px)
+$spacing-sm: $spacing-unit * 2; // 0.5rem (8px)
+$spacing-md: $spacing-unit * 3; // 0.75rem (12px)
+$spacing-lg: $spacing-unit * 4; // 1rem (16px)
+$spacing-xl: $spacing-unit * 6; // 1.5rem (24px)
+$spacing-xxl: $spacing-unit * 8; // 2rem (32px)
+
+
+// == Borders & Radius ==
+
+$border-width: 1px;
+$border-width-thick: 2px;
+
+$border-radius-small: 4px;
+$border-radius-medium: 8px;
+$border-radius-large: 16px;
+$border-radius-pill: 28px; // For FAB-like buttons
+$border-radius-round: 50%;
+
+
+// == Box Shadows ==
+// Based on Material Design elevation
+$box-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); // Low elevation
+$box-shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); // Medium elevation
+$box-shadow-fab: 0 4px 12px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1); // FAB Resting
+$box-shadow-modal: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.2); // Modal
+
+
+// == Z-Index ==
+// Define stacking order
+
+$z-index-default: 1;
+$z-index-sticky: 10; // Sticky elements like search bar
+$z-index-dropdown: 20; // Dropdown menus
+$z-index-fab: 100; // Floating Action Button
+$z-index-overlay: 105; // Modal overlay
+$z-index-modal: 110; // Modals
+
+
+// == Transitions ==
+
+$transition-duration: 0.2s;
+$transition-timing-function: ease-in-out;
+$transition-default: all $transition-duration $transition-timing-function;
+
+
+// == Breakpoints == (Example values)
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;

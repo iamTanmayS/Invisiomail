@@ -1,0 +1,220 @@
+.email-item {
+    display: grid;
+    grid-template-columns: auto minmax(140px, 200px) 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #f1f3f4;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.15s ease-in-out;
+    min-width: 0;
+
+    &:hover {
+        background-color: #f8f9fa;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+        .hover-actions {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .email-meta {
+            opacity: 0;
+        }
+    }
+
+    &.unread {
+        background-color: #f9f9f9;
+
+        .email-sender .sender-name,
+        .email-content .email-subject {
+            font-weight: 600;
+            color: #202124;
+        }
+    }
+
+    &.selected {
+        background-color: #e8f0fe;
+
+        &::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: #1a73e8;
+        }
+    }
+}
+
+.email-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.checkbox-container {
+    input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        border-radius: 2px;
+        border: 2px solid #5f6368;
+        appearance: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:checked {
+            background-color: #1a73e8;
+            border-color: #1a73e8;
+
+            &::after {
+                content: '';
+                position: absolute;
+                left: 6px;
+                top: 2px;
+                width: 5px;
+                height: 10px;
+                border: solid white;
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg);
+            }
+        }
+    }
+}
+
+.star-button {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    color: #5f6368;
+
+    .star-icon {
+        width: 18px;
+        height: 18px;
+
+        &.starred {
+            color: #f4b400;
+        }
+    }
+}
+
+.email-sender {
+    min-width: 0;
+
+    .sender-name {
+        font-size: 0.875rem;
+        color: #202124;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.email-content {
+    min-width: 0;
+
+    .email-subject {
+        font-size: 0.875rem;
+        color: #5f6368;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+    }
+}
+
+.email-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: opacity 0.2s ease;
+    white-space: nowrap;
+    margin-left: auto;
+
+    .email-date {
+        font-size: 0.75rem;
+        color: #5f6368;
+        min-width: 60px;
+        text-align: right;
+    }
+
+    .attachment-icon {
+        color: #5f6368;
+        display: flex;
+        align-items: center;
+
+        svg {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+.hover-actions {
+    position: absolute;
+    right: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transform: translateX(10px);
+    transition: all 0.2s ease-in-out;
+    background: linear-gradient(to left, #f8f9fa 70%, transparent);
+    padding: 0 1rem;
+
+    button {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: none;
+        background: transparent;
+        color: #5f6368;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: #1a73e8;
+        }
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+    }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+    .email-item {
+        grid-template-columns: auto 1fr auto;
+
+        .email-sender {
+            display: none;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .email-item {
+        padding: 0.75rem;
+        gap: 0.75rem;
+
+        .hover-actions {
+            display: none;
+        }
+
+        .email-meta {
+            opacity: 1;
+            position: static;
+        }
+    }
+}

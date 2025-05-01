@@ -1,0 +1,58 @@
+.email-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: #192d3e;
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    height: 100%; // Take full height of parent
+    min-height: 0; // Important for Firefox
+    flex: 1; // Take remaining space
+    position: relative;
+}
+
+.email-list {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+    flex: 1;
+    min-height: 0; // Important for Firefox
+
+    // Customize scrollbar
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+    }
+
+    // Firefox scrollbar
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+// Email items container
+.email-items-container {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0; // Important for Firefox
+}
+
+@media (max-width: 768px) {
+    .email-list-wrapper {
+        border-radius: 8px;
+    }
+
+    .email-list {
+        &::-webkit-scrollbar {
+            width: 4px; // Smaller scrollbar for mobile
+        }
+    }
+}

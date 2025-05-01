@@ -7,6 +7,7 @@ const configurePassport = require('./configs/passport/passport')
 const authRoutes = require('./routes/auth')
 const emailRoutes = require("./routes/emailroutes")
 const userRoutes = require("./routes/userroutes")
+const TrackandUpdateRoute = require("./routes/TrackandUpdateroutes")
 const cookieParser = require("cookie-parser")
 const app = express()
 
@@ -42,13 +43,7 @@ app.use(passport.initialize())
 app.use('/auth', authRoutes)
 app.use("/",emailRoutes)
 app.use("/",userRoutes)
-
-
-
-
-
-connectMongodb()
-
+app.use("/", TrackandUpdateRoute)
 
 
 
@@ -59,10 +54,21 @@ app.post("/",(req,res)=>{
 
 
 
+const startServer = async () => {
 
-// server started
-app.listen(
-    config.port.development || 8000 ,()=>{
-        console.log("server is running on port 3000")
+    try {
+        // Connect to MongoDB first
+        connectMongodb();
+
+        // Start express server after successful DB connection
+        app.listen(config.port.development || 8000,'0.0.0.0', () => {
+            console.log(`Server is running on port ${config.port.development || 8000}`);
+        });
+    } catch (error) {
+        console.error('Failed to start server:', error);
+        process.exit(1);
     }
-)
+};
+
+
+startServer();

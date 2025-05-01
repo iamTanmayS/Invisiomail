@@ -1,15 +1,15 @@
-import React from 'react'
-import { FcGoogle } from "react-icons/fc";
 import "../../Styles/Buttons/LoginwithGoogleButton.css"
 
-function LoginwithGoogleButton({buttonTitle,buttonFunctionality}) {
+import { FcGoogle } from "react-icons/fc";
+import React from 'react'
+
+function LoginwithGoogleButton({buttonTitle,buttonFunctionality,Icon}) {
   return (
     <div className="Loginwithgooglecontainer">
       <button className="buttonLogin"
       onClick={buttonFunctionality}>
         
-        <FcGoogle
-        className='google-icon'/>
+      {Icon && <Icon className="button-icon"/>}
         <span>{buttonTitle}</span>
       </button>
     </div>

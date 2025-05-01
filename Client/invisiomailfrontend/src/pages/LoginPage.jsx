@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
 import '../Styles/LoginPage.css';
+
+import React, { useEffect } from 'react';
+
+import { FcGoogle } from "react-icons/fc";
 import LoginwithGoogleButton from '../components/Buttons/LoginwithGoogleButton';
 import { loginWithGoogle } from '../Api/Authentication';
+import { motion } from 'framer-motion';
 
 const LoginPage = () => {
     // Your illustrations import would go here
@@ -146,7 +149,8 @@ const LoginPage = () => {
                 >
                     <LoginwithGoogleButton 
                     buttonTitle = "Login With Google"
-                    buttonFunctionality = {handleLoginWithGoogleButton}/>
+                    buttonFunctionality = {handleLoginWithGoogleButton}
+                    Icon={FcGoogle}/>
                 </motion.div>
 
                 <motion.div

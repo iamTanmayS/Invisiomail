@@ -1,0 +1,121 @@
+// src/styles/Dashboard/Dashboardstyles/SkeletonLoader.scss
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.skeleton-loader {
+    display: flex;
+    flex-direction: column;
+    // Mimic the background/container of the actual list
+    background-color: #ffffff;
+    border-radius: 16px; // Match EmailListWrapper radius
+    overflow: hidden; // Contain shimmer
+
+    .skeleton-item {
+        display: flex; // Use flex to align items like EmailItem
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem 1rem; // Match EmailItem padding
+        border-bottom: 1px solid #f1f3f4; // Match EmailItem border
+        min-height: 65px; // Approximate height of an EmailItem
+        background-color: #e0e0e0; // Base skeleton color
+        background-image: linear-gradient(to right, #e0e0e0 0%, #f5f5f5 50%, #e0e0e0 100%);
+        background-repeat: no-repeat;
+        background-size: 2000px 100%; // Large size for shimmer effect
+        animation: shimmer 1.5s linear infinite;
+        position: relative; // Needed if using absolute positioning for elements
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        // Define skeleton parts
+        .skeleton-checkbox {
+            width: 18px;
+            height: 18px;
+            border-radius: 2px;
+            background-color: #bdbdbd; // Slightly darker placeholder
+            flex-shrink: 0; // Prevent shrinking
+            margin-right: 0.25rem; // Space like the real checkbox container
+        }
+
+        .skeleton-content {
+            flex: 1; // Takes up most space
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem; // Space between lines
+
+            .skeleton-sender {
+                width: 30%; // Approximate width
+                height: 14px;
+                border-radius: 4px;
+                background-color: #bdbdbd;
+            }
+
+            .skeleton-subject {
+                width: 70%; // Approximate width
+                height: 14px;
+                border-radius: 4px;
+                background-color: #bdbdbd;
+            }
+
+            .skeleton-preview {
+                width: 90%; // Approximate width
+                height: 12px;
+                border-radius: 4px;
+                background-color: #cfcfcf; // Slightly lighter for preview line
+            }
+        }
+
+        .skeleton-date {
+            width: 50px; // Approximate width
+            height: 12px;
+            border-radius: 4px;
+            background-color: #cfcfcf;
+            flex-shrink: 0; // Prevent shrinking
+        }
+    }
+}
+
+
+// Responsive adjustments for skeleton loader
+@media (max-width: 768px) {
+    .skeleton-loader {
+        border-radius: 8px; // Match mobile EmailListWrapper
+
+        .skeleton-item {
+            padding: 0.75rem; // Match mobile EmailItem padding
+
+            // Adjust layout similar to mobile EmailItem if needed
+            // e.g., hide sender, adjust widths
+            .skeleton-content {
+                .skeleton-sender {
+                    display: none; // Sender is hidden on mobile EmailItem
+                }
+
+                .skeleton-subject {
+                    width: 50%;
+                }
+
+                .skeleton-preview {
+                    width: 80%;
+                }
+            }
+
+            .skeleton-date {
+                // Position like mobile EmailItem meta (optional, simple layout often fine)
+                // position: absolute;
+                // top: 0.75rem;
+                // right: 0.75rem;
+                width: 40px;
+            }
+        }
+    }
+}

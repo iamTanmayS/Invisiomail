@@ -1,18 +1,27 @@
-const mongoose = require("mongoose")
 
+const mongoose = require("mongoose");
+const config = require("../../configs/configenv");
+ 
 
+const connectMongodb = async () => {
 
-const connectMongodb = () => 
-    {
-
-                             
+    
     try {
-        mongoose.connect(process.env.MONGO_URL)
-        console.log("connected to mongodb")
+        await mongoose.connect(config.mongodb.url);
+        console.log("Connected to MongoDB successfully");
     } catch (error) {
-        console.log(error)
-    }
+        console.error("MongoDB connection error:", error);
+        
     }
 
+    mongoose.connection.on('error', err => {
+        console.error('MongoDB connection error:', err);
+    });
+
+    mongoose.connection.on('disconnected', () => {
+        console.log('MongoDB disconnected. Attempting to reconnect...');
+        setTimeout(connectMongodb, 5000);
+    });
+}
 
 module.exports = connectMongodb

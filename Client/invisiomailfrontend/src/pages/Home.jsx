@@ -1,16 +1,18 @@
-import React from 'react'
-import { useDispatch } from 'react-redux';
-import { loginWithGoogle, logout } from '../Api/Authentication'
-import { fetchUser } from '../Redux/Slice/authslice';
-import HeroSection from '../components/HerosectionBackground/HeroSection'
 import "../Styles/Home.css"
-import Herosectionbutton from '../components/StyledComponent/Herosectionbutton'
-import HeroTextDisplay from '../components/HeroRotatingText'
-import { motion } from 'framer-motion'
-import { createRawMail } from '../Api/EmailsFunctions'
-import { useSelector } from "react-redux";
-import { selectIsAuthenticated } from "../Redux/Slice/authslice";
+
+import { loginWithGoogle, logout } from '../Api/Authentication'
+
 import GetStartedbuttonfunctionality from '../utils/Getstartedbuttonfunctionality';
+import HeroSection from '../components/HerosectionBackground/HeroSection'
+import HeroTextDisplay from '../components/HeroRotatingText'
+import Herosectionbutton from '../components/StyledComponent/Herosectionbutton'
+import React from 'react'
+import { createRawMail } from '../Api/EmailsFunctions'
+import { fetchUser } from '../Redux/Slice/authslice';
+import { motion } from 'framer-motion'
+import { selectIsAuthenticated } from "../Redux/Slice/authslice";
+import { useDispatch } from 'react-redux';
+import { useSelector } from "react-redux";
 
 function Home() {
   const dispatch = useDispatch();
@@ -67,7 +69,7 @@ function Home() {
             
             <Herosectionbutton 
               buttontitle="Learn More" 
-              herobuttonfunction={() => createRawMail({to:"tanmayshukla338@gmail.com", subject:"Hello", body:"Hello World!"})}
+              herobuttonfunction={() => createRawMail({ to: "yogendrasinghmaihar@gmail.com", subject: "Hello", body:"<h1> Hello, see this is not working </h1>"})}
             />
           </motion.div>
         </div>

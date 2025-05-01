@@ -1,5 +1,5 @@
-import { fetchWithAutoRefresh } from "./Authentication";
 import config from "../configs/configenv";
+import { fetchWithAutoRefresh } from "./Authentication";
 
 export const fetchallemails = async () => {
     try {
@@ -7,17 +7,36 @@ export const fetchallemails = async () => {
         method: 'GET',
         credentials: 'include',
       });
-      console.log(await res.json())
-     return res;
+     
+      const emails = await res.json();
+      return emails
     } catch (err) {
       console.error('Error fetching emails:', err);
       throw err;
     }
   };
 
+
+  export const fetchemailcontent = async(emailId) => {
+    try{
+         const res = await fetchWithAutoRefresh(`${config.Server.serverUrl}/emails/${emailId}`,{
+          method:"GET",
+          credentials:"include",
+          headers:{
+            "Content-Type":"application/json"
+          }
+          })
+          return res;
+    }  
+     catch(err){
+               console.error('Error fetching email Content:',err)
+               throw err;
+     }
+  };
+
 export const createRawMail = async ({ to, subject, body, cc = '', bcc = '' }) => {
     try {
-      const res = await fetchWithAutoRefresh(`${config.Server.serverUrl}/send-email`, {
+      const res = await fetchWithAutoRefresh(`${config.Server.serverUrl}/sendMail`, {
         method: 'POST',
         credentials: 'include',
         headers: {

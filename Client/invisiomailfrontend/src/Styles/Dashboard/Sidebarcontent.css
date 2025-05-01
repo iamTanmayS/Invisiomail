@@ -1,27 +1,25 @@
-/* src/components/Sidebar/SidebarContent.css */
 .sidebar-content {
-  position: fixed; /* Mobile first: Fixed position */
-  inset-block-start: 0; /* inset-y-0 */
+  position: fixed;
+  inset-block-start: 0;
   inset-block-end: 0;
-  inset-inline-start: 0; /* left-0 */
-  z-index: 10; /* Above backdrop */
-  width: 16rem; /* w-64 */
-  background-color: #ffffff; /* --color-white */
-  border-right: 2px solid #e0e7ff; /* --color-indigo-100 */
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* --shadow-lg */
-  border-top-right-radius: 1.5rem; /* --border-radius-3xl */
-  border-bottom-right-radius: 1.5rem; /* --border-radius-3xl */
-  display: flex; /* Needed for flex children like nav */
-  flex-shrink: 0; /* Prevent shrinking in main flex layout */
-
-  /* Transitions */
+  inset-inline-start: 0;
+  z-index: 50;
+  width: 16rem;
+  background-color: #ffffff;
+  border-right: 2px solid #e0e7ff;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  border-top-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  display: flex;
+  flex-shrink: 0;
   transform: translateX(-100%);
-  transition: transform 300ms ease-in-out; /* --transition-duration / timing */
+  transition: transform 300ms ease-in-out;
 }
 
 .sidebar-content.open {
   transform: translateX(0);
 }
+
 
 .sidebar-nav {
     display: flex;
@@ -171,28 +169,40 @@
     color: #11182c; /* --color-gray-900 */
 }
 
-
-/* Responsive Adjustments */
-@media (min-width: 640px) { /* sm breakpoint */
+@media (min-width: 640px) {
   .sidebar-content {
-      left: 4rem; /* sm:left-16 */
-      width: 18rem; /* sm:w-72 */
+    left: 4rem;
+    width: 18rem;
   }
-   .promo-card {
-       display: block; /* md:block */
-   }
-   .promo-button-mobile {
-       display: none; /* md:hidden */
-   }
+  .promo-card {
+    display: block;
+  }
+  .promo-button-mobile {
+    display: none;
+  }
 }
 
-@media (min-width: 1024px) { /* lg breakpoint */
+@media (min-width: 1024px) {
   .sidebar-content {
-    position: static; /* lg:static */
-    width: 16rem; /* lg:w-64 */
-    border-radius: 0; /* Reset radius */
-    box-shadow: none; /* Reset shadow */
-    border-right: 2px solid #e0e7ff; /* --color-indigo-100 */
-    
+    position: relative;
+    left: 0;
+    width: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transform: none;
+    overflow: hidden;
+    transition: width 300ms ease-in-out;
+  }
+
+  .sidebar-content.open {
+    width: 16rem;
+    transform: none;
+    border-right: 2px solid #e0e7ff;
+  }
+
+  /* Ensure inner content doesn't shrink */
+  .sidebar-content > nav,
+  .sidebar-content > section {
+    min-width: 16rem;
   }
 }

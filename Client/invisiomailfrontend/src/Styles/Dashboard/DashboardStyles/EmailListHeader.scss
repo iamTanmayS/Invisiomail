@@ -1,0 +1,389 @@
+// --- Base Variables (Keep these as they are good for theming) ---
+:root {
+    --header-bg-color: #ffffff;
+    --header-border-color: #e0e0e0;
+    --icon-color: #5f6368;
+    --icon-color-hover: #202124;
+    --icon-color-active: #1a73e8;
+    --text-color-secondary: #5f6368;
+    --text-color-primary: #202124;
+    --button-hover-bg: rgba(60, 64, 67, 0.08);
+    --button-active-bg: rgba(60, 64, 67, 0.12);
+    --dropdown-bg: #ffffff;
+    --dropdown-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    --dropdown-item-hover-bg: #f1f3f4;
+    --dropdown-item-active-bg: #e8f0fe;
+    --dropdown-item-active-color: var(--icon-color-active);
+    --checkbox-border-color: #adb5bd;
+    --checkbox-checked-bg: var(--icon-color-active);
+    --checkbox-checked-color: #ffffff;
+    --checkbox-indeterminate-color: var(--icon-color); // Color for the dash
+    --border-radius-small: 4px;
+    --border-radius-medium: 8px;
+    --transition-speed: 0.15s;
+    --icon-size-sm: 18px; // Define standard icon sizes
+    --icon-size-xs: 16px;
+}
+
+.email-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--header-border-color);
+    background-color: var(--header-bg-color);
+    gap: 1rem;
+
+    // --- Shared Button Styles ---
+    .icon-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: none;
+        background-color: transparent;
+        color: var(--icon-color);
+        cursor: pointer;
+        transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+
+        svg {
+            // Style react-icons SVGs directly
+            width: var(--icon-size-sm);
+            height: var(--icon-size-sm);
+            display: block; // Prevents potential extra space below svg
+        }
+
+        &:hover {
+            background-color: var(--button-hover-bg);
+            color: var(--icon-color-hover);
+        }
+
+        &:active {
+            background-color: var(--button-active-bg);
+        }
+
+        &.active {
+            color: var(--icon-color-active);
+        }
+
+        &:disabled {
+            color: var(--header-border-color);
+            cursor: not-allowed;
+            background-color: transparent;
+        }
+    }
+
+    // --- Header Left Section ---
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    // --- Select Control (Checkbox + Dropdown) ---
+    .select-control {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid transparent;
+        border-radius: var(--border-radius-small);
+        padding: 0 2px;
+        transition: background-color var(--transition-speed) ease;
+        overflow: hidden;
+        &:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        // Custom Checkbox Styling
+        .checkbox-container {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+            font-size: 22px;
+            user-select: none;
+            padding: 6px;
+            margin-right: -4px;
+
+            input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+
+            .checkmark {
+                position: relative;
+                top: 0;
+                left: 0;
+                height: 18px;
+                width: 18px;
+                background-color: var(--header-bg-color);
+                border: 1.5px solid var(--checkbox-border-color);
+                border-radius: var(--border-radius-small);
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+
+                .indeterminate-mark {
+                    // Style the dash
+                    display: block;
+                    width: 10px;
+                    height: 2px;
+                    background-color: var(--checkbox-indeterminate-color);
+                }
+            }
+
+            input:checked~.checkmark {
+                background-color: var(--checkbox-checked-bg);
+                border-color: var(--checkbox-checked-bg);
+
+                .indeterminate-mark {
+                    display: none;
+                }
+
+                // Hide dash when checked
+            }
+
+            // CSS Checkmark symbol
+            input:checked~.checkmark:after {
+                content: "";
+                display: block;
+                width: 5px;
+                height: 10px;
+                border: solid var(--checkbox-checked-color);
+                border-width: 0 2px 2px 0;
+                transform: rotate(45deg) translate(-1px, -1px);
+            }
+
+            // Style based on input's :indeterminate state (supported by modern browsers)
+            input:indeterminate~.checkmark {
+                background-color: var(--header-bg-color);
+                border-color: var(--checkbox-border-color);
+                // The .indeterminate-mark span will be visible based on component logic
+            }
+
+            input:indeterminate:checked~.checkmark {
+
+                // Should not happen, but resets just in case
+                .indeterminate-mark {
+                    display: block;
+                }
+
+                &:after {
+                    display: none;
+                }
+
+                // Hide checkmark if indeterminate somehow gets checked state
+            }
+
+            input:focus-visible~.checkmark {
+                outline: 2px solid var(--icon-color-active);
+                outline-offset: 2px;
+            }
+        }
+
+        .select-dropdown-toggle {
+            width: 10px;
+            height: 20px;
+            margin-left: -2px;
+            color: var(--icon-color);
+
+            svg {
+                width: var(--icon-size-xs);
+                height: var(--icon-size-xs);
+            }
+
+            &:hover {
+                background-color: transparent;
+                color: var(--icon-color-hover);
+            }
+        }
+
+        .select-options-menu {
+            left: 0;
+            top: calc(100% + 4px);
+        }
+    }
+
+    // Ensure refresh button has correct icon size if needed
+    .refresh-button svg {
+        width: var(--icon-size-sm);
+        height: var(--icon-size-sm);
+    }
+
+    // --- Header Right Section ---
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    // --- Sort Control ---
+    .sort-control {
+        position: relative;
+
+        .sort-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem; // Gap between icon, label, arrow
+            border: none;
+            background: transparent;
+            color: var(--text-color-secondary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--border-radius-medium);
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+
+            &:hover {
+                background-color: var(--button-hover-bg);
+                color: var(--text-color-primary);
+            }
+
+            .sort-icon-indicator {
+                display: none; // Hide by default on larger screens
+                width: var(--icon-size-sm);
+                height: var(--icon-size-sm);
+                color: var(--icon-color); // Standard color
+            }
+
+            .sort-label {
+                margin-right: 0.25rem; // Space before dropdown arrow
+            }
+
+            .dropdown-arrow {
+                // Chevron down icon
+                width: var(--icon-size-xs);
+                height: var(--icon-size-xs);
+                margin-left: auto; // Push to the right if needed
+            }
+        }
+
+        .sort-options-menu {
+            right: 0;
+            top: calc(100% + 4px);
+        }
+    }
+
+    // --- Shared Dropdown Menu Styles ---
+    .dropdown-menu {
+        position: absolute;
+        background-color: var(--dropdown-bg);
+        border-radius: var(--border-radius-medium);
+        box-shadow: var(--dropdown-shadow);
+        overflow: hidden;
+        min-width: 160px; // Slightly smaller min-width
+        z-index: 100;
+        padding: 0.5rem 0;
+
+        .dropdown-item {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 0.65rem 1rem;
+            border: none;
+            background-color: transparent;
+            color: var(--text-color-primary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+
+            &:hover {
+                background-color: var(--dropdown-item-hover-bg);
+            }
+
+            &.active {
+                background-color: var(--dropdown-item-active-bg);
+                color: var(--dropdown-item-active-color);
+                font-weight: 500;
+            }
+        }
+    }
+
+    // --- View Options ---
+    .view-options {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        border-left: 1px solid var(--header-border-color);
+        padding-left: 0.75rem;
+
+        .view-option {
+
+            
+            svg {
+                width: var(--icon-size-sm);
+                height: var(--icon-size-sm);
+            }
+        }
+    }
+}
+
+// --- Responsive Adjustments ---
+@media (max-width: 768px) {
+    .email-list-header {
+        padding: 0.5rem 0.75rem;
+        gap: 0.5rem;
+
+        .header-left {
+            gap: 0.25rem;
+        }
+
+        .header-right {
+            gap: 0.25rem;
+        }
+
+        .sort-control .sort-button {
+            padding: 0.5rem; // Reduce padding to make it feel like an icon button
+
+            .sort-icon-indicator {
+                display: block; // Show sort icon
+            }
+
+            .sort-label {
+                // Use clip-path or similar accessible hiding technique instead of display:none
+                border: 0;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                width: 1px;
+                white-space: nowrap;
+            }
+
+            .dropdown-arrow {
+                display: none; // Hide chevron when label is hidden
+            }
+        }
+
+        .view-options {
+            display: none; // Keep hiding view options for simplicity
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .email-list-header {
+        .icon-button {
+            // Ensure touch targets are okay
+            width: 32px;
+            height: 32px;
+        }
+
+        .select-control .select-dropdown-toggle {
+            width: 24px;
+            height: 24px;
+        }
+
+        // Adjust icon sizes slightly smaller if needed
+        // --icon-size-sm: 16px;
+        // --icon-size-xs: 14px;
+    }
+}

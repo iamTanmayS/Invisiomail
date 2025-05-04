@@ -1,4 +1,4 @@
-import { Box, Button, Stack, TextField } from "@mui/material";
+import { Alert, Box, Button, Snackbar, Stack, TextField } from "@mui/material";
 import {
     LinkBubbleMenu,
     MenuButton,
@@ -10,6 +10,8 @@ import { Lock, LockOpen, TextFields } from "@mui/icons-material";
 import { useCallback, useRef, useState } from "react";
 
 import EditorMenuControls from "./EditorMenuControls";
+import GenerateMailToaster from "../Toasters/GenerateMail";
+import { createRawMail } from "../../Api/EmailsFunctions";
 import useExtensions from "./useExtensions";
 
 function fileListToImageFiles(fileList) {
@@ -26,16 +28,39 @@ export default function Editor() {
     const rteRef = useRef(null);
     const [isEditable, setIsEditable] = useState(true);
     const [showMenuBar, setShowMenuBar] = useState(true);
+    const [openToast, setOpenToast] = useState(false);
     const [emailData, setEmailData] = useState({
         to: '',
         subject: ''
     });
+
+    // Handler for receiving generated email content
+    const handleGeneratedEmail = (content) => {
+        if (rteRef.current?.editor) {
+            // Set the generated content in the editor
+            rteRef.current.editor.commands.setContent(content);
+        }
+    };
 
     const handleEmailDataChange = (field) => (event) => {
         setEmailData(prev => ({
             ...prev,
             [field]: event.target.value
         }));
+    };
+
+    const clearEditor = () => {
+        if (rteRef.current?.editor) {
+            rteRef.current.editor.commands.clearContent();
+        }
+        setEmailData({ to: '', subject: '' });
+    };
+
+    const handleCloseToast = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenToast(false);
     };
 
     const handleNewImageFiles = useCallback(
@@ -109,6 +134,20 @@ export default function Editor() {
                 gap: 2,
             }}
         >
+            {/* Email Generation Toaster */}
+            <GenerateMailToaster onGenerateComplete={handleGeneratedEmail} />
+
+            <Snackbar
+                open={openToast}
+                autoHideDuration={3000}
+                onClose={handleCloseToast}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            >
+                <Alert onClose={handleCloseToast} severity="success" sx={{ width: '100%' }}>
+                    Email sent successfully!
+                </Alert>
+            </Snackbar>
+
             {/* Email Header Fields */}
             <Stack spacing={2}>
                 <TextField
@@ -205,13 +244,13 @@ export default function Editor() {
                                     size="small"
                                     onClick={() => {
                                         const content = rteRef.current?.editor?.getHTML() ?? "";
-                                        const emailContent = {
+                                        createRawMail({
                                             to: emailData.to,
                                             subject: emailData.subject,
                                             body: content
-                                        };
-                                        console.log('Email Data:', emailContent);
-                                        // Handle email submission here
+                                        });
+                                        clearEditor();
+                                        setOpenToast(true);
                                     }}
                                 >
                                     Send

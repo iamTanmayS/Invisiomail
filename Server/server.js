@@ -3,11 +3,14 @@ const cors = require("cors")
 const config = require("../Server/configs/configenv")
 const connectMongodb = require("../Server/database/connection/connection")
 const passport = require('passport')
+const bodyParser = require('body-parser');
 const configurePassport = require('./configs/passport/passport')
 const authRoutes = require('./routes/auth')
 const emailRoutes = require("./routes/emailroutes")
 const userRoutes = require("./routes/userroutes")
 const TrackandUpdateRoute = require("./routes/TrackandUpdateroutes")
+const DashboardRoute = require("./routes/Dashboardroutes")
+const AiGenerationRouter = require("./routes/EmailGenerationRoute")
 const cookieParser = require("cookie-parser")
 const app = express()
 
@@ -28,7 +31,7 @@ app.use(cors({
 
 app.use(express.json())
 app.use(cookieParser());
-
+app.use(bodyParser.json());
 
 
 
@@ -44,12 +47,8 @@ app.use('/auth', authRoutes)
 app.use("/",emailRoutes)
 app.use("/",userRoutes)
 app.use("/", TrackandUpdateRoute)
-
-
-
-app.post("/",(req,res)=>{
-    res.send("Hello from server")
-})
+app.use("/", DashboardRoute)
+app.use('/',AiGenerationRouter)
 
 
 

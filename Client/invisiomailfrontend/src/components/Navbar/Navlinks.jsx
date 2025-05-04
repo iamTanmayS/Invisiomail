@@ -1,9 +1,11 @@
 // NavbarComponents/NavLinks.jsx
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+
+import { AnimatePresence, motion } from 'framer-motion';
+import { buttonVariants, dropdownVariants, itemVariants } from './Animationconstants';
+
 import { ChevronDown } from 'lucide-react';
-import { dropdownVariants, itemVariants, buttonVariants } from './Animationconstants';
 import DropdownContent from './Dropdown';
+import React from 'react';
 
 const NavLinks = ({ mobileMenuOpen, activeDropdown, toggleDropdown, handleLogin }) => {
     return (
@@ -13,7 +15,7 @@ const NavLinks = ({ mobileMenuOpen, activeDropdown, toggleDropdown, handleLogin 
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
         >
-            {['platform', 'solutions', 'resources', 'company'].map((item, index) => (
+            {[].map((item, index) => (  // add elements inside the array to create the dropdown for them
                 <motion.div
                     key={item}
                     className="nav-item"
@@ -57,16 +59,29 @@ const NavLinks = ({ mobileMenuOpen, activeDropdown, toggleDropdown, handleLogin 
                 </motion.div>
             ))}
 
+            
             <motion.a
-                href="/pricing"
+                href="/analytics"
                 className="nav-link"
                 variants={buttonVariants}
                 initial="initial"
                 whileHover="hover"
                 whileTap="tap"
             >
-                Pricing
+                Dashboard
             </motion.a>
+
+            <motion.a
+                href="https://sprinkle-catamaran-a18.notion.site/InvisioMail-Documentation-1e9ef125dd9380f9890dc750582ff775"
+                className="nav-link"
+                variants={buttonVariants}
+                initial="initial"
+                whileHover="hover"
+                whileTap="tap"
+            >
+                Documentation
+            </motion.a>
+
 
             {/* Mobile-only buttons */}
             {mobileMenuOpen && (

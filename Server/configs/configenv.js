@@ -29,6 +29,9 @@ const config = {
  },
  mongodb:{
   url:getEnv("MONGO_URL")
+ },
+ gemini:{
+  api:getEnv("GEMINI_API")
  }
  
  }

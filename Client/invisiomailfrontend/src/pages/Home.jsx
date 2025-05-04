@@ -69,7 +69,7 @@ function Home() {
             
             <Herosectionbutton 
               buttontitle="Learn More" 
-              herobuttonfunction={() => createRawMail({ to: "yogendrasinghmaihar@gmail.com", subject: "Hello", body:"<h1> Hello, see this is not working </h1>"})}
+              herobuttonfunction={() => window.open("https://sprinkle-catamaran-a18.notion.site/InvisioMail-Documentation-1e9ef125dd9380f9890dc750582ff775", "_blank")}
             />
           </motion.div>
         </div>

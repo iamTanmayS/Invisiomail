@@ -1,0 +1,647 @@
+/* EmailAnalytics.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ensure body allows scrolling */
+html {
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+body {
+  overflow-y: auto; /* Allow vertical scroll when content exceeds viewport */
+}
+
+/* Dark Theme Variables (Optional but recommended for maintainability) */
+:root {
+  --dark-bg: #1a202c; /* Deep dark blue-gray */
+  --card-bg: #2d3748; /* Slightly lighter dark blue-gray */
+  --border-color: #4a5568; /* Medium gray for borders */
+  --text-primary: #e2e8f0; /* Light gray for primary text */
+  --text-secondary: #a0aec0; /* Lighter gray for secondary text */
+  --text-headings: #ffffff; /* White for main headings */
+  --accent-blue: #4299e1; /* Brighter blue for accents */
+  --accent-blue-darker: #2b6cb0;
+  --link-color: var(--accent-blue);
+  --button-primary-bg-start: var(--accent-blue);
+  --button-primary-bg-end: var(--accent-blue-darker);
+  --button-secondary-bg-start: #4a5568;
+  --button-secondary-bg-end: #2d3748;
+  --input-bg: #2d3748;
+  --input-border: #4a5568;
+  --input-focus-border: var(--accent-blue);
+  --input-focus-shadow: rgba(66, 153, 225, 0.3);
+  --table-header-bg: #1f2937; /* Darker shade for table headers */
+  --table-row-hover-bg: #374151; /* Subtle hover for table rows */
+
+  /* Status Pill Colors (Dark Theme) */
+  --status-sent-bg: #065f46;
+  --status-sent-text: #a7f3d0;
+  --status-delivered-bg: #075985;
+  --status-delivered-text: #bae6fd;
+  --status-failed-bg: #991b1b;
+  --status-failed-text: #fecaca;
+  --status-pending-bg: #92400e;
+  --status-pending-text: #fde68a;
+
+  /* Stats Card Colors (Dark Theme) */
+  --stats-blue-bg: #2b6cb0;
+  --stats-green-bg: #2f855a;
+  --stats-purple-bg: #6b46c1;
+  --stats-amber-bg: #b7791f;
+  --stats-card-text: #ffffff;
+}
+
+.analytics-container {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--dark-bg); /* Dark background */
+  height: 100vh;
+  overflow-y: auto;
+  padding: 2rem;
+  color: var(--text-primary); /* Default light text */
+}
+
+.main-content {
+  /* Remove any fixed height constraints */
+  min-height: calc(100vh - 4rem); /* Account for padding */
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(15px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Apply animation to cards */
+.analytics-card, .email-detail-container {
+  animation: slideUp 0.5s ease-out forwards;
+  opacity: 0; /* Start hidden */
+}
+
+/* Stagger animation for list items if needed (can be complex with CSS only) */
+/* You might apply animation delays in JS if needed */
+
+/* Typography */
+.page-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--text-headings); /* White headings */
+  margin-bottom: 0.5rem;
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.page-subtitle {
+  color: var(--text-secondary); /* Lighter secondary text */
+  font-size: 1rem;
+   animation: fadeIn 0.7s ease-out forwards;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-primary); /* Light text */
+}
+
+.section-subtitle {
+  color: var(--text-secondary); /* Lighter secondary text */
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Card Styling */
+.analytics-card {
+  background-color: var(--card-bg); /* Darker card background */
+  border-radius: 0.75rem;
+  /* Use a subtle shadow, maybe darker */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  overflow: hidden;
+  border: 1px solid var(--border-color); /* Add subtle border */
+}
+
+.analytics-card:hover {
+  transform: translateY(-3px) scale(1.01); /* Slightly more pronounced hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.overview-card {
+  padding: 1.5rem;
+}
+
+.card-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color); /* Darker border */
+}
+
+.card-header-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Search and controls */
+.search-control {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary); /* Light icon */
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem;
+  border: 1px solid var(--input-border); /* Darker border */
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  background-color: var(--input-bg); /* Dark input bg */
+  color: var(--text-primary); /* Light text in input */
+}
+
+.search-input::placeholder {
+    color: var(--text-secondary); /* Lighter placeholder */
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--input-focus-border); /* Accent blue on focus */
+  box-shadow: 0 0 0 3px var(--input-focus-shadow); /* Blue glow */
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* Buttons */
+.btn-primary, .btn-secondary, .btn-view, .back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-size: 0.875rem;
+}
+
+.btn-primary {
+  /* Gradient adjusted for dark theme, could be solid */
+  background: linear-gradient(135deg, var(--button-primary-bg-start) 0%, var(--button-primary-bg-end) 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+   /* Adjust shadow color for dark theme */
+  box-shadow: 0 4px 12px rgba(66, 153, 225, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+   /* Darker gradient or solid color */
+  background: linear-gradient(135deg, var(--button-secondary-bg-start) 0%, var(--button-secondary-bg-end) 100%);
+  color: var(--text-primary); /* Light text */
+  border: 1px solid var(--border-color); /* Add border for definition */
+}
+
+.btn-secondary:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+  filter: brightness(1.1); /* Slightly lighten on hover */
+}
+
+.btn-view {
+  color: var(--link-color); /* Use link color */
+  background: none;
+}
+
+.btn-view:hover {
+  text-decoration: underline;
+  color: var(--accent-blue-darker);
+}
+
+.back-button {
+  color: var(--link-color);
+  background: none;
+  padding-left: 0;
+  margin-bottom: 1.5rem;
+}
+
+.back-button:hover {
+  color: var(--accent-blue-darker);
+}
+
+/* Icon styles (Ensure icons are visible) */
+.icon-refresh, .icon-download, .icon-eye, .icon-arrow-left,
+.icon-mail, .icon-calendar {
+  display: inline-block;
+  margin-right: 0.375rem;
+  /* Color might be inherited, but can be set explicitly if needed */
+  /* color: var(--text-primary); */
+}
+
+/* Chart section */
+.chart-section {
+  margin-top: 1.5rem;
+}
+
+.chart-container {
+  height: 400px;
+  margin: 2rem 0;
+}
+
+/* Style Chart elements (might need !important or specific selectors) */
+.recharts-cartesian-axis-tick-value,
+.recharts-legend-item-text,
+.recharts-tooltip-label,
+.recharts-tooltip-item-name,
+.recharts-tooltip-item-value {
+  fill: var(--text-secondary) !important; /* Light text for chart labels/tooltip */
+  font-size: 0.75rem;
+}
+.recharts-cartesian-axis-line,
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: var(--border-color) !important; /* Darker grid lines */
+  opacity: 0.5;
+}
+.recharts-tooltip-wrapper {
+    border: 1px solid var(--border-color) !important;
+    background: var(--card-bg) !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Bar color is set in React component via 'fill' prop, but you could try: */
+/* .recharts-bar-rectangle path { fill: var(--accent-blue); } */
+
+
+/* Table styling */
+.table-responsive {
+  overflow-x: auto;
+  margin: 2rem 0;
+}
+
+.analytics-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.analytics-table th {
+  background-color: var(--table-header-bg); /* Darker header background */
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary); /* Lighter header text */
+  border-bottom: 1px solid var(--border-color);
+}
+/* Style first and last header cells for rounded corners on card */
+.analytics-card .analytics-table th:first-child {
+    border-top-left-radius: 0.75rem; /* Match card radius if header is at the top */
+}
+.analytics-card .analytics-table th:last-child {
+    border-top-right-radius: 0.75rem; /* Match card radius */
+}
+/* Remove radius if header is not directly under card top */
+.card-header + .table-responsive .analytics-table th:first-child,
+.card-header + .table-responsive .analytics-table th:last-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+
+.analytics-table td {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color); /* Dark border */
+  font-size: 0.875rem;
+  color: var(--text-primary); /* Light text */
+}
+
+.analytics-table tbody tr {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  /* Add subtle row animation */
+  animation: fadeIn 0.4s ease-out forwards;
+  opacity: 0;
+}
+/* Stagger row animations (better done with JS, but simple CSS example) */
+.analytics-table tbody tr:nth-child(2) { animation-delay: 0.05s; }
+.analytics-table tbody tr:nth-child(3) { animation-delay: 0.1s; }
+.analytics-table tbody tr:nth-child(4) { animation-delay: 0.15s; }
+/* etc. */
+
+
+.analytics-table tbody tr:hover {
+  background-color: var(--table-row-hover-bg); /* Subtle dark hover */
+  transform: scale(1.005); /* Slight scale on hover */
+}
+
+.email-subject {
+  font-weight: 500;
+  color: var(--text-primary); /* Ensure subject stands out slightly if needed */
+}
+
+.open-count {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary); /* Lighter color for secondary info */
+}
+.open-count .icon-eye {
+  color: var(--accent-blue); /* Make eye icon blue */
+}
+
+.no-results {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 2rem 0;
+}
+
+/* Status pills */
+.status-pill {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  border: 1px solid transparent; /* Base border */
+}
+
+.status-sent {
+  background-color: var(--status-sent-bg);
+  color: var(--status-sent-text);
+  border-color: var(--status-sent-text);
+}
+
+.status-delivered {
+  background-color: var(--status-delivered-bg);
+  color: var(--status-delivered-text);
+  border-color: var(--status-delivered-text);
+}
+
+.status-failed {
+  background-color: var(--status-failed-bg);
+  color: var(--status-failed-text);
+  border-color: var(--status-failed-text);
+}
+
+.status-pending {
+  background-color: var(--status-pending-bg);
+  color: var(--status-pending-text);
+  border-color: var(--status-pending-text);
+}
+
+/* Email Detail View */
+.email-detail-container {
+  background-color: var(--card-bg); /* Use card background */
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  width: 100%;
+  padding: 2rem;
+}
+
+.email-detail-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.email-detail-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-headings); /* White title */
+}
+
+.email-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.metadata-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary); /* Lighter text */
+}
+.metadata-item i { /* Style detail icons if needed */
+    color: var(--accent-blue);
+}
+
+.email-content-section, .tracking-section, .technical-section {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+.email-detail-container > div:last-child {
+    border-bottom: none; /* Remove border from last section */
+}
+
+.email-content {
+  background-color: var(--dark-bg); /* Use main dark bg for contrast */
+  border-radius: 0.5rem;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  margin-top: 0.75rem;
+  overflow: auto;
+  max-height: 300px;
+  color: var(--text-primary); /* Ensure content text is light */
+}
+/* Style content within the email body if necessary */
+.email-content a {
+    color: var(--link-color);
+}
+.email-content p, .email-content div, .email-content span {
+    color: var(--text-primary) !important; /* Force color if needed */
+}
+
+
+/* Stats cards grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.stats-card {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: var(--stats-card-text); /* White text for stats */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.stats-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Use darker, distinct colors for dark theme stats */
+.blue-card { background-color: var(--stats-blue-bg); }
+.green-card { background-color: var(--stats-green-bg); }
+.purple-card { background-color: var(--stats-purple-bg); }
+.amber-card { background-color: var(--stats-amber-bg); }
+
+.stats-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7); /* Slightly transparent white */
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.stats-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--stats-card-text); /* White value */
+}
+
+/* Technical details table */
+.details-table {
+  width: 100%;
+  margin-top: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  overflow: hidden; /* Clip content to rounded corners */
+}
+
+.details-table tr {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.details-table tr:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary); /* Lighter text for label */
+  width: 30%;
+  background-color: var(--table-header-bg); /* Slightly different background */
+}
+
+.detail-value {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--text-primary); /* Light text for value */
+  word-break: break-word;
+  background-color: var(--card-bg); /* Match card background */
+}
+
+/* Loading state */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--dark-bg); /* Dark background */
+}
+
+.loading-content {
+  text-align: center;
+  color: var(--text-primary); /* Light text */
+}
+
+.loading-spinner {
+  border: 4px solid rgba(255, 255, 255, 0.1); /* Lighter base border */
+  border-radius: 50%;
+  border-top: 4px solid var(--accent-blue); /* Accent color for spinner */
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 1rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .card-header-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-control {
+    max-width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .action-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .main-content {
+    padding: 1rem; /* Reduce padding on smaller screens */
+  }
+  .page-title {
+    font-size: 1.625rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .stats-grid {
+    grid-template-columns: 1fr; /* Stack stats cards */
+  }
+
+  .email-metadata {
+    flex-direction: column;
+    align-items: flex-start; /* Align metadata items left */
+    gap: 0.5rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  /* Adjust table display for very small screens if needed */
+  /* (Could involve hiding columns or changing display modes) */
+}

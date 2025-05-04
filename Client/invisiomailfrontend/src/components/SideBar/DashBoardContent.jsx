@@ -1,7 +1,7 @@
-import '../../styles/Dashboard/Dashboardstyles/EmailDashboard.scss';
+import "../../Styles/Dashboard/DashboardStyles/EmailDashboard.scss";
 
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import ComposeButton from '../Dashboard/ComposeButton';
 import EmailList from '../Dashboard/EmailList';
 import Pagination from '../Dashboard/Pagination';
@@ -9,6 +9,7 @@ import SearchBar from '../Dashboard/SearchBar';
 import SkeletonLoader from '../Dashboard/SkeletonLoader';
 import { fetchallemails } from '../../Api/EmailsFunctions';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const EmailDashboard = () => {
     const [emails, setEmails] = useState([]);

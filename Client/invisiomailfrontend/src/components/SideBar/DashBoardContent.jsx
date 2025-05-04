@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import ComposeButton from '../Dashboard/ComposeButton';
 import EmailList from '../Dashboard/EmailList';
 import Pagination from '../Dashboard/Pagination';
-import SearchBar from '../Dashboard/SearchBar';
+import SearchBar from "../Dashboard/Searchbar";
 import SkeletonLoader from '../Dashboard/SkeletonLoader';
 import { fetchallemails } from '../../Api/EmailsFunctions';
 import { motion } from 'framer-motion';

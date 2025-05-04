@@ -54,20 +54,20 @@ app.use('/',AiGenerationRouter)
 
 
 const startServer = async () => {
+  try {
+    await connectMongodb();
 
-    try {
-        // Connect to MongoDB first
-        connectMongodb();
+    const env = process.env.NODE_ENV || 'development';
+    const PORT = process.env.PORT || config.port[env] || 8000;
 
-        // Start express server after successful DB connection
-        app.listen(config.port.development || 8000,'0.0.0.0', () => {
-            console.log(`Server is running on port ${config.port.development || 8000}`);
-        });
-    } catch (error) {
-        console.error('Failed to start server:', error);
-        process.exit(1);
-    }
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`Server running in ${env} mode on port ${PORT}`);
+    });
+
+  } catch (error) {
+    console.error('❌ Failed to start server:', error);
+    process.exit(1);
+  }
 };
-
 
 startServer();

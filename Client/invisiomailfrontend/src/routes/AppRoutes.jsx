@@ -16,13 +16,12 @@ import React from 'react';
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Wrap your layout around all nested routes */}
+    
       <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />           {/* path="/" */}
+        <Route index element={<Home />} />           
         <Route path="about" element={<About />} />  
         <Route path="login" element={<LoginPage />} />  
-     
-        <Route path="*" element={<NotFound />} />    {/* path="*" inside layout */}
+        <Route path="*" element={<NotFound />} /> 
       </Route>
 
 
@@ -32,7 +31,6 @@ const AppRoutes = () => {
         <Route path="analytics" element={<EmailAnalytics />} />
         <Route path="/email/send" element= {<ComposeEmail/>}/>
         <Route path="/about" element={<AnimatedAboutPage />} />
-
       </Route>
     </Routes>
   );

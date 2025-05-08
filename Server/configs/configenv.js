@@ -21,7 +21,7 @@ const config = {
   },
  client:{
   devUrl: getEnv("CLIENT_DEV_URL"),
-  
+  prodUrl:getEnv("CLIENT_PROD_URL")
  },
  jwt:{
   accessTokenSecret:getEnv("JWT_ACCESSTOKEN_SECRET"),

@@ -4,10 +4,11 @@
  * @param {string} messageId - The unique ID for the email
  * @returns {string} The email body with the tracking pixel attached
  */
+const config = require("../configs/configenv")
 
 const attachTrackingPixelToBody = (emailBody, messageId) => {
   const uniqueParam = Date.now();
-  const trackingUrl = `https://became-nigeria-pages-designed.trycloudflare.com/${messageId}?t=${uniqueParam}`;
+  const trackingUrl = `${config.client.prodUrl}/${messageId}?t=${uniqueParam}`;
   
 
   const trackingPixelHtml = `<img src="${trackingUrl}" width="1" height="1" alt="" style="display:None" loading="eager" />`;

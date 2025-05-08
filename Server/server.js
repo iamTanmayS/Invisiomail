@@ -20,7 +20,7 @@ const app = express()
 
 
 app.use(cors({
-    origin:config.client.devUrl,
+    origin: config.client.devUrl,
     methods: "GET,POST,PUT,DELETE",
     credentials: true
 }))
@@ -58,7 +58,7 @@ const startServer = async () => {
     await connectMongodb();
 
     const env = process.env.NODE_ENV || 'development';
-    const PORT = process.env.PORT || config.port[env] || 8000;
+    const PORT = process.env.PORT || config.port[env] || 3000;
 
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`Server running in ${env} mode on port ${PORT}`);

@@ -7,7 +7,7 @@
 
 const attachTrackingPixelToBody = (emailBody, messageId) => {
   const uniqueParam = Date.now();
-  const trackingUrl = `https://invisiomail.onrender.com/track/${messageId}?t=${uniqueParam}`;
+  const trackingUrl = `https://became-nigeria-pages-designed.trycloudflare.com/${messageId}?t=${uniqueParam}`;
   
 
   const trackingPixelHtml = `<img src="${trackingUrl}" width="1" height="1" alt="" style="display:None" loading="eager" />`;

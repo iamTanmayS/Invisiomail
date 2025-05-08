@@ -68,7 +68,7 @@ class AuthController {
               });
             } else {
               // Set all tokens in secure cookies
-              const isProd = process.env.NODE_ENV === 'production';
+            
       
               res.cookie('accessToken', jwtAccessToken, {
                 httpOnly: true,

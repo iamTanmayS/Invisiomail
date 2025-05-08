@@ -9,18 +9,19 @@ const getEnv = (envfile) =>
        }
 }
 
-
 const config = {
  port:{
-   development:getEnv("PORT_DEV")
+   development: getEnv("PORT_DEV"),
+   production: getEnv("PORT_PROD") || 8000
  },
  google:{
-    clientID:getEnv("GOOGLE_CLIENT_ID"),
-    clientSecret:getEnv("GOOGLE_CLIENT_SECRET"),
-    callbackURL:getEnv("GOOGLE_CALLBACK_URL")
+    clientID: getEnv("GOOGLE_CLIENT_ID"),
+    clientSecret: getEnv("GOOGLE_CLIENT_SECRET"),
+    callbackURL: getEnv("GOOGLE_CALLBACK_URL")
   },
  client:{
-  devUrl: getEnv("CLIENT_DEV_URL")
+  devUrl: getEnv("CLIENT_DEV_URL"),
+  
  },
  jwt:{
   accessTokenSecret:getEnv("JWT_ACCESSTOKEN_SECRET"),
